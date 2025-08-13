@@ -9,7 +9,7 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY) // faz a relação com a tabela de roles
+    @ManyToOne(fetch = FetchType.LAZY) // faz a relação com a tabela de roles, lazy preguiçosa para não carregar os dados de roles até que sejam necessários
     @JoinColumn(name = "role_id") // chave estrangeira que referencia a tabela de roles
     private Role role;
 
