@@ -52,7 +52,7 @@ src/
 
 ### 1️⃣ Clonar o Repositório
 ```bash
-git clone https://github.com/usuario/projeto-enchentes-backend.git
+git clone https://github.com/angelofilippi/projeto-enchentes-backend.git
 cd projeto-enchentes-backend
 ```
 
