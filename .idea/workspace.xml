@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ae4023a-b686-4996-a87a-6edd59c51da5" name="Changes" comment="" />
+    <list default="true" id="7ae4023a-b686-4996-a87a-6edd59c51da5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enchentes/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/enchentes/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,7 +89,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1755036553235</updated>
-      <workItem from="1755036554687" duration="6409000" />
+      <workItem from="1755036554687" duration="6899000" />
     </task>
     <servers />
   </component>
