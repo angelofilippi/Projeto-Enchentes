@@ -1,11 +1,53 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Environment-dependent path to Maven home directory
-/mavenHomeManager.xml
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
+# ==== Build artefacts ====
+target/
+**/target/
+build/
+**/build/
+out/
+
+# ==== Logs / temporários ====
+logs/
+*.log
+*.tmp
+*.sw?
+hs_err_pid*
+replay_pid*
+
+# ==== Spring Boot (segredos/config locais) ====
 src/main/resources/application.properties
+src/main/resources/application.yml
+src/main/resources/application-*.properties
+src/main/resources/application-*.yml
+.env
+.env.*
+*.env
+
+# ==== IDEs ====
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+# Eclipse / STS
+.classpath
+.project
+.settings/
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+# VS Code
+.vscode/
+
+# ==== OS cruft ====
+.DS_Store
+Thumbs.db
+
+#
+HELP.md
