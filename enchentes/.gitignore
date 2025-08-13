@@ -1,33 +1,53 @@
-HELP.md
+# ==== Build artefacts ====
 target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+**/target/
+build/
+**/build/
+out/
 
-### STS ###
-.apt_generated
+# ==== Logs / temporários ====
+logs/
+*.log
+*.tmp
+*.sw?
+hs_err_pid*
+replay_pid*
+
+# ==== Spring Boot (segredos/config locais) ====
+src/main/resources/application.properties
+src/main/resources/application.yml
+src/main/resources/application-*.properties
+src/main/resources/application-*.yml
+.env
+.env.*
+*.env
+
+# ==== IDEs ====
+# IntelliJ
+.idea/workspace.xml
+*.iml
+*.iws
+*.ipr
+# Eclipse / STS
 .classpath
-.factorypath
 .project
-.settings
+.settings/
+.apt_generated
+.factorypath
 .springBeans
 .sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+# VS Code
 .vscode/
+
+# ==== OS cruft ====
+.DS_Store
+Thumbs.db
+
+#
+HELP.md
