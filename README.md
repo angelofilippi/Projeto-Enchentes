@@ -28,11 +28,11 @@ A API foi projetada seguindo **boas práticas de segurança**, incluindo:
 ---
 
 ## 🚀 Funcionalidades Principais
-- Registro e login de usuários.
-- Gestão de permissões e papéis (roles).
-- Coleta e armazenamento de dados do nível do rio.
-- Emissão de alertas de risco.
-- Histórico de medições e relatórios.
+- Registro e login de usuários. (Em desenvolvimento)
+- Gestão de permissões e papéis (roles). (Em desenvolvimento)
+- Coleta e armazenamento de dados do nível do rio. (Em desenvolvimento)
+- Emissão de alertas de risco. (Em desenvolvimento)
+- Histórico de medições e relatórios. (Em desenvolvimento)
 
 ---
 
