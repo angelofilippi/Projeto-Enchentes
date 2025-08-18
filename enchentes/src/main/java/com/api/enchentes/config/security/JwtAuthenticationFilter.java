@@ -3,13 +3,13 @@ package com.api.enchentes.config.security;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
+import org.aspectj.weaver.ltw.LTWWorld;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.api.enchentes.security.JwtService;
 
 import java.io.IOException;
 
@@ -33,13 +33,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
-            return;
+            throw new IllegalArgumentException("Header Authorization é requerido e deve começar com 'Bearer'");
         }
         final String token = authHeader.substring(7);
         String username = jwtService.extractUsername(token);
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (username == null) {
+            throw new IllegalArgumentException("Token inválido");
+        }
+
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails user = userDetailsService.loadUserByUsername(username);
             if (jwtService.isValid(token, user.getUsername())) {
                 UsernamePasswordAuthenticationToken auth =
