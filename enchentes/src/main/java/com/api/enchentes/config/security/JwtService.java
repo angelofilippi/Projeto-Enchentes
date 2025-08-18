@@ -1,4 +1,4 @@
-package com.api.enchentes.security;
+package com.api.enchentes.config.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

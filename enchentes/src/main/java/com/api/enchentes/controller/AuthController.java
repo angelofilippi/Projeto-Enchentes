@@ -1,4 +1,4 @@
-package com.api.enchentes.auth.controller;
+package com.api.enchentes.controller;
 
 import com.api.enchentes.auth.dto.*;
 import com.api.enchentes.auth.service.AuthService;
