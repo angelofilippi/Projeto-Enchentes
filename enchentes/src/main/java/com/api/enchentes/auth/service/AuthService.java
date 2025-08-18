@@ -1,7 +1,7 @@
 package com.api.enchentes.auth.service;
 
 import com.api.enchentes.auth.dto.*;
-import com.api.enchentes.security.JwtService;
+import com.api.enchentes.config.security.JwtService;
 import com.api.enchentes.user.entity.Role;
 import com.api.enchentes.user.entity.User;
 import com.api.enchentes.user.repository.RoleRepository;
