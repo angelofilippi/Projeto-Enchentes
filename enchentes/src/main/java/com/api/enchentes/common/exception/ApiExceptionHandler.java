@@ -1,5 +1,6 @@
 package com.api.enchentes.common.exception;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.*;
 import org.springframework.security.access.AccessDeniedException;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import jakarta.validation.ConstraintViolationException;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
@@ -16,27 +17,37 @@ public class ApiExceptionHandler {
     // 400 – Validação de @Valid em corpos JSON (DTOs)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleValidation(MethodArgumentNotValidException ex) {
-        var fieldError = ex.getBindingResult().getFieldErrors().stream().findFirst();
-        var message = fieldError
+        String message = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
                 .map(fe -> fe.getField() + " " + fe.getDefaultMessage())
-                .orElse("Requisição inválida");
+                .distinct()
+                .collect(Collectors.joining("; "));
+        if (message == null || message.isBlank()) {
+            message = "Requisição inválida";
+        }
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ApiError.of(message, HttpStatus.BAD_REQUEST));
     }
 
-    // 400 – Validação de parâmetros (ex.: @RequestParam, @PathVariable)
+    // 400 – Validação de parâmetros (@RequestParam, @PathVariable, @Validated em método)
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ApiError> handleConstraintViolation(ConstraintViolationException ex) {
-        var message = ex.getConstraintViolations().stream().findFirst()
+        String message = ex.getConstraintViolations()
+                .stream()
                 .map(v -> v.getPropertyPath() + " " + v.getMessage())
-                .orElse("Parâmetros inválidos");
+                .distinct()
+                .collect(Collectors.joining("; "));
+        if (message == null || message.isBlank()) {
+            message = "Parâmetros inválidos";
+        }
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ApiError.of(message, HttpStatus.BAD_REQUEST));
     }
 
-    // 400 – Tipo de argumento inválido (ex.: converteu string para number e falhou)
+    // 400 – Tipo de argumento inválido (ex.: conversão de String -> Long falhou)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ApiError> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         String message = "Parâmetro '%s' inválido".formatted(ex.getName());
@@ -45,7 +56,7 @@ public class ApiExceptionHandler {
                 .body(ApiError.of(message, HttpStatus.BAD_REQUEST));
     }
 
-    // 400 – Erros de regra de negócio simples
+    // 400 – Regra de negócio simples
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiError> handleIllegalArgument(IllegalArgumentException ex) {
         return ResponseEntity
@@ -69,6 +80,7 @@ public class ApiExceptionHandler {
                 .body(ApiError.of("Acesso negado", HttpStatus.FORBIDDEN));
     }
 
+    // 409 – Violações de integridade (chaves únicas, FKs, etc.)
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ApiError> handleDataIntegrity(DataIntegrityViolationException ex) {
         String message = "Conflito de dados. Verifique se já existe um registro com esses valores.";
