@@ -33,7 +33,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            throw new IllegalArgumentException("Header Authorization é requerido e deve começar com 'Bearer'");
+            filterChain.doFilter(request, response);
+            return;
         }
         final String token = authHeader.substring(7);
         String username = jwtService.extractUsername(token);
