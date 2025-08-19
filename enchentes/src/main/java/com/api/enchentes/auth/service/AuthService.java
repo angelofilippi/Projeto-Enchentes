@@ -40,9 +40,7 @@ public class AuthService {
         u.setPassword(encoder.encode(req.password()));
         u.setRole(role);
         userRepo.save(u);
-
-        String token = jwtService.generateToken(u.getUsername());
-        return new AuthResponse(token);
+        return null;
     }
 
     public AuthResponse login(AuthRequest req) {
